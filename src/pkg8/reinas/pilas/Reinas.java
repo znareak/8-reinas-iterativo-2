@@ -20,14 +20,18 @@ public class Reinas {
         while (true) {
             while (columnaActual < cantidadReinas) {
                 if (esCorrectoElTablero(pila, columnaActual)) {
+                    // si el las columnas marcadas y diagonales no atacan a la reina, se coloca en el tablero
                     pila.push(columnaActual);
                     tablero[pila.size() - 1] = columnaActual;
                     columnaActual = 0;
                 } else {
+                    // aumentamos la columna, si la columna excede el limite del tablero
+                    // entonces
                     columnaActual++;
                 }
             }
             
+            // si la pila tiene 8 reinas, eso quiere decir que se encontro una solucion
             if (pila.size() == cantidadReinas) {
                 solucionesEncontradas++;
                 imprimirSolucion(solucionesEncontradas);
@@ -39,6 +43,8 @@ public class Reinas {
                 break;
             }
             
+            // si la pila esta llena, quiere decir que se encontro una solucion, asi que eliminamnos la ultima dama
+            // para buscar mas soluciones
             if (pila.top() == cantidadReinas) {
                 pila.pop();
             }
