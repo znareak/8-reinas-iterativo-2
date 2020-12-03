@@ -18,7 +18,7 @@ public class Programa implements Acciones {
                 int reinas = Integer.parseInt(str);
                 if (numeroDentroDelRango(reinas)) {
 
-                    Algoritmo ag = new Algoritmo(reinas); // constructor
+                    Acciones ag = new Algoritmo(reinas); // constructor
                     ag.comenzar();
                     ag = null;
                     seguir = false;
