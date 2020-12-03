@@ -1,15 +1,20 @@
 package pkg8.reinas.pilas;
 
 import pkg8.reinas.Stack.piladinamica;
-import static pkg8.reinas.pilas.Helpers.log;
-import static pkg8.reinas.pilas.Helpers.logLn;
+import static pkg8.reinas.pilas.Helpers.imprimirEnLinea;
+import static pkg8.reinas.pilas.Helpers.imprimir;
 
 public class Algoritmo {
 
-    static final int NUM_REINAS = 8;
-    static int[] tablero = new int[NUM_REINAS];
+    static int[] tablero;
 
     static void resolver(int cantidadReinas) {
+        if(cantidadReinas == 2 | cantidadReinas == 3){
+            imprimir("Para esta cantidad no existen soluciones.");
+            return;
+        }
+        
+        tablero = new int[cantidadReinas];
         int columnaActual = 0;
         int solucionesEncontradas = 0;
         piladinamica<Integer> pila = new piladinamica<>();
@@ -31,7 +36,7 @@ public class Algoritmo {
             // si la pila tiene 8 elementos (reinas), eso quiere decir que se encontro una solucion
             if (pila.size() == cantidadReinas) {
                 solucionesEncontradas++;
-                imprimirSolucion(solucionesEncontradas);
+                imprimirSolucion(solucionesEncontradas, cantidadReinas);
             }
 
             // si el tope de la pilla llega ser nulo (vacio), quiere decir que ya no existe reinas por colocar
@@ -40,13 +45,7 @@ public class Algoritmo {
                 break;
             }
 
-            // si la pila esta llena, quiere decir que se encontro una solucion, asi que eliminamnos la ultima dama
-            // para buscar mas soluciones
-            if (pila.top() == cantidadReinas) {
-                pila.pop();
-            }
-
-            // si no se ha entrado en los condicionales anteriores es porque aun queda reinas y por ende mas soluciones
+            // si no se ha entrado en los condicionales anteriores es porque aun queda reinas y por ende mas soluciones,
             // con esta sentencia eliminamos la anterior dama (columna) y a su vez pasamos a la siguiente columna para
             // seguir buscando mas soluciones
             columnaActual = pila.pop() + 1;
@@ -57,6 +56,7 @@ public class Algoritmo {
 
     static boolean esCorrectoElTablero(piladinamica<Integer> pila, int columnaActual) {
 
+        // iteramos en la pila, cabe destacar que solo recorrera la cantidad de reinas que esten colocadas actualmente
         for (int columna = 0; columna < pila.size(); columna++) {
             // tablero[columna] me da un numero que es la columna donde esta ubicada esa reina
             boolean mismaColumna = tablero[columna] == columnaActual;
@@ -73,20 +73,20 @@ public class Algoritmo {
         return true;
     }
 
-    static void imprimirSolucion(int solucion) {
-        logLn(solucion + ": ");
-        for (int fila = 0; fila < NUM_REINAS; fila++) {
-            for (int columna = 0; columna < NUM_REINAS; columna++) {
+    static void imprimirSolucion(int solucion, int cantidadReinas) {
+        imprimir(solucion + ": ");
+        for (int fila = 0; fila < cantidadReinas; fila++) {
+            for (int columna = 0; columna < cantidadReinas; columna++) {
 
                 // se va comprobando si en la fila existe una reina
                 if (fila == tablero[columna]) {
-                    log("Q ");
+                    imprimirEnLinea("Q ");
                 } else {
-                    log("# ");
+                    imprimirEnLinea("# ");
                 }
             }
-            log("\n");
+            imprimirEnLinea("\n");
         }
-        logLn("");
+        imprimir("");
     }
 }

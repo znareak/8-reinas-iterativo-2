@@ -4,15 +4,15 @@ import java.util.Scanner;
 
 public class Helpers {
 
-    public static void logLn(Object o) {
+    public static void imprimir(Object o) {
         System.out.println(o);
     }
 
-    public static void log(Object o) {
+    public static void imprimirEnLinea(Object o) {
         System.out.print(o);
     }
 
-    public static boolean isNumber(String str) {
+    public static boolean esNumero(String str) {
         boolean numeric = true;
 
         try {
@@ -24,14 +24,13 @@ public class Helpers {
         return numeric;
     }
 
-    public static boolean isNumberInRange(int n) {
+    public static boolean numeroDentroDelRango(int n) {
         return n >= 1 && n <= 8;
     }
 
-    public static String readString() {
+    public static String leerCadena() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         return input;
     }
-
 }
