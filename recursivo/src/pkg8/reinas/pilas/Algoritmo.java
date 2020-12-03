@@ -76,8 +76,8 @@ public class Algoritmo implements Acciones{
             boolean mismaColumna = tablero[columna] == columnaActual;
 
             // la resta de las filas y columnas es siempre constante.
-            // si la columna de la reina ya colocada menos la columna en la que se itera actualmente es igual
-            // 
+            // si la columna de la reina ya colocada menos la columna actual en la que se itera actualmente es igual
+            // a la cantidad de reinas ya colocadas y menos la columna que se quiere poner entonces esta ocupaa por otra reina
             boolean mismaDiagonal = Math.abs(columnaActual - tablero[columna]) == pila.size() - columna;
 
             if (mismaColumna || mismaDiagonal) {
