@@ -3,10 +3,25 @@ package pkg8.reinas.pilas;
 import pkg8.reinas.Stack.piladinamica;
 import static pkg8.reinas.pilas.Helpers.imprimirEnLinea;
 import static pkg8.reinas.pilas.Helpers.imprimir;
+ 
+public class Algoritmo implements Acciones{
 
-public class Algoritmo {
+    int cantidadReinas;
+    int tablero[];
 
-    static void resolver(int columnaActual, int solucionesEncontradas, piladinamica<Integer> pila, int tablero[], int cantidadReinas) {
+    // constructor
+    public Algoritmo(int reinas) {
+        this.cantidadReinas = reinas;
+        this.tablero = new int[reinas];
+    }
+    
+    @Override
+    public void comenzar(){
+        resolver(0, 0, new piladinamica<>());
+    }
+    
+        
+    public void resolver(int columnaActual, int solucionesEncontradas, piladinamica<Integer> pila) {
         if (cantidadReinas == 2 | cantidadReinas == 3) {
             imprimir("Para esta cantidad no existen soluciones.");
             return;
@@ -30,13 +45,15 @@ public class Algoritmo {
         // si la pila tiene 8 elementos (reinas), eso quiere decir que se encontro una solucion
         if (pila.size() == cantidadReinas) {
             solucionesEncontradas++;
-            imprimirSolucion(solucionesEncontradas, tablero, cantidadReinas);
+            imprimirSolucion(solucionesEncontradas);
 
         }
 
         // si el tope de la pilla llega ser nulo (vacio), quiere decir que ya no existe reinas por colocar
         // por ende ya se encontraron todas las soluciones posibles, salimos del ciclo padre
         if (pila.top() == null) {
+            pila = null; // se vacia el objeto
+            tablero = null;
             return;
         }
 
@@ -46,13 +63,10 @@ public class Algoritmo {
         columnaActual = pila.pop() + 1;
 
         // volvemos a llamar con las variables ya modificadas
-        resolver(columnaActual, solucionesEncontradas, pila, tablero, cantidadReinas);
-
-        pila = null; // se vacia el objeto
-        tablero = null;
+        resolver(columnaActual, solucionesEncontradas, pila);
     }
 
-    static boolean esCorrectoElTablero(piladinamica<Integer> pila, int columnaActual, int tablero[]) {
+    boolean esCorrectoElTablero(piladinamica<Integer> pila, int columnaActual, int tablero[]) {
 
         // iteramos en la pila, cabe destacar que solo recorrera la cantidad de reinas que esten colocadas actualmente
         for (int columna = 0; columna < pila.size(); columna++) {
@@ -71,7 +85,7 @@ public class Algoritmo {
         return true;
     }
 
-    static void imprimirSolucion(int solucion, int tablero[], int cantidadReinas) {
+    void imprimirSolucion(int solucion) {
         imprimir(solucion + ": ");
         for (int fila = 0; fila < cantidadReinas; fila++) {
             for (int columna = 0; columna < cantidadReinas; columna++) {
