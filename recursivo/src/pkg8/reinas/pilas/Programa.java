@@ -1,6 +1,5 @@
 package pkg8.reinas.pilas;
 
-import pkg8.reinas.Stack.piladinamica;
 import static pkg8.reinas.pilas.Helpers.esNumero;
 import static pkg8.reinas.pilas.Helpers.imprimir;
 import static pkg8.reinas.pilas.Helpers.leerCadena;
@@ -19,7 +18,7 @@ public class Programa implements Acciones {
                 if (numeroDentroDelRango(reinas)) {
 
                     Acciones ag = new Algoritmo(reinas); // constructor
-                    ag.comenzar();
+                    ag.comenzar(); // ligadura dinamica de metodos
                     ag = null;
                     seguir = false;
 

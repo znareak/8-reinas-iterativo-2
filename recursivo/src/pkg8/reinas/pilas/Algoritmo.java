@@ -17,7 +17,9 @@ public class Algoritmo implements Acciones{
     
     @Override
     public void comenzar(){
-        resolver(0, 0, new piladinamica<>());
+        piladinamica<Integer> pila = new piladinamica<>();
+        resolver(0, 0, pila); // usando la pila dinamica
+        pila = null;
     }
     
         
