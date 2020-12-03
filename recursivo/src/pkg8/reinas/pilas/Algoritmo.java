@@ -17,10 +17,9 @@ public class Algoritmo {
                 // si el las columnas marcadas y diagonales no atacan a la reina, se coloca en el tablero
                 pila.push(columnaActual);
                 tablero[pila.size() - 1] = columnaActual;
-              
+
                 columnaActual = 0;
-                
-                
+
             } else {
                 // aumentamos la columna, si la columna es mayor a NUM_REINAS-1 entonces se encontro una solucion
                 // salimos del ciclo para buscar otra solucion
@@ -32,8 +31,7 @@ public class Algoritmo {
         if (pila.size() == cantidadReinas) {
             solucionesEncontradas++;
             imprimirSolucion(solucionesEncontradas, tablero, cantidadReinas);
-           
-            
+
         }
 
         // si el tope de la pilla llega ser nulo (vacio), quiere decir que ya no existe reinas por colocar
@@ -45,8 +43,11 @@ public class Algoritmo {
         // si no se ha entrado en los condicionales anteriores es porque aun queda reinas y por ende mas soluciones,
         // con esta sentencia eliminamos la anterior dama (columna) y a su vez pasamos a la siguiente columna para
         // seguir buscando mas soluciones
-         columnaActual = pila.pop() + 1;
+        columnaActual = pila.pop() + 1;
+
+        // volvemos a llamar con las variables ya modificadas
         resolver(columnaActual, solucionesEncontradas, pila, tablero, cantidadReinas);
+
         pila = null; // se vacia el objeto
         tablero = null;
     }
