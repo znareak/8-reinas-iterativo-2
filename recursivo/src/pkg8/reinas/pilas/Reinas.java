@@ -10,7 +10,10 @@ public class Reinas {
         
         
         Acciones p = new Programa();
-        p.comenzar(); // ligadura dinamica de metodos
+        
+        p.comenzar(); 
+        
+        
         p = null;
     }
 }
